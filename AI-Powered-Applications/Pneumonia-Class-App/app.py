@@ -1,3 +1,4 @@
+%%writefile app.py
 import warnings
 import logging
 
@@ -82,7 +83,7 @@ model = load_model_from_url()
 def main():
     st.subheader("📤 Upload a Chest X-Ray Image for Analysis")
     st.write("This AI tool helps detect signs of pneumonia in chest X-ray images. ")
-    st.write("   ⚠️ Make Sure you Uploading an image associated with the used case ")
+    st.write("   ⚠️ Make Sure you Upload an image associated with the used case ")
     
     uploaded_file = st.file_uploader(
         "Choose a JPG or PNG image of a chest X-ray", 
