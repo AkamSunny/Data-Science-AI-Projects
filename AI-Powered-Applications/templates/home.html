@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎗️ BreastCare Predict</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #6c757d;
+            --accent: #e83e8c;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --pink-light: #fff5f7;
+            --blue-light: #e8f4f8;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: linear-gradient(to right, var(--primary), #6c5ce7);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: white !important;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color: white !important;
+            transform: translateY(-2px);
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(74, 111, 165, 0.9), rgba(108, 92, 231, 0.85)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%234a6fa5" opacity="0.1"/><path d="M0 0L100 100" stroke="%23ffffff" stroke-width="1" opacity="0.1"/><path d="M100 0L0 100" stroke="%23ffffff" stroke-width="1" opacity="0.1"/></svg>');
+            color: white;
+            padding: 2rem 0;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            background: linear-gradient(to right, var(--primary), #6c5ce7);
+            color: white;
+            font-weight: 600;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 1rem 1.5rem;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.2rem rgba(74, 111, 165, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), #6c5ce7);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(74, 111, 165, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(74, 111, 165, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn-outline-secondary {
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .prevention-section {
+            background-color: var(--pink-light);
+            border-left: 5px solid var(--accent);
+            padding: 25px;
+            border-radius: 10px;
+            height: 100%;
+        }
+
+        .prevention-section h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .feature-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .feature-list li i {
+            position: absolute;
+            left: 0;
+            top: 3px;
+            color: var(--accent);
+            font-size: 18px;
+        }
+
+        .result-box {
+            background-color: var(--blue-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            transition: all 0.5s ease;
+        }
+
+        .info-note {
+            background-color: #e8f4f8;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .ribbon {
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background: linear-gradient(to right, var(--dark), #2c3e50);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .who-link {
+            color: #0077cc;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: 2px solid #0077cc;
+            border-radius: 30px;
+            background-color: rgba(0, 119, 204, 0.1);
+        }
+
+        .who-link:hover {
+            color: white;
+            background-color: #0077cc;
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 119, 204, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 1.8rem;
+            }
+
+            .prevention-section {
+                margin-top: 2rem;
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('home') }}">
+                <i class="fas fa-ribbon mr-2"></i>BreastCare Predict
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('about') }}">About BreastCare</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-4 font-weight-bold">Breast Cancer Prediction Tool</h1>
+            <p class="lead">For Medical Professionals Only</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="info-note">
+            <strong>Note:</strong> We are committed to updating our algorithm using modern research data to ensure accurate predictions.
+        </div>
+
+        <div class="row">
+            <!-- Prediction Form -->
+            <div class="col-lg-7">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-calculator mr-2"></i>Enter Patient Data
+                    </div>
+                    <div class="card-body">
+                        <!-- Simple form that submits directly to backend -->
+                        <form action="{{ url_for('cancerPrediction') }}" method="POST" id="predictionForm">
+                            <div class="form-group">
+                                <label for="query1">Perimeter_worst:</label>
+                                <input type="number" step="any" class="form-control" id="query1" name="query1" value="{{ query1 if query1 else '' }}" placeholder="Enter value" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="query2">Concave points_worst:</label>
+                                <input type="number" step="any" class="form-control" id="query2" name="query2" value="{{ query2 if query2 else '' }}" placeholder="Enter value" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="query3">Concave points_mean:</label>
+                                <input type="number" step="any" class="form-control" id="query3" name="query3" value="{{ query3 if query3 else '' }}" placeholder="Enter value" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="query4">Area_mean:</label>
+                                <input type="number" step="any" class="form-control" id="query4" name="query4" value="{{ query4 if query4 else '' }}" placeholder="Enter value" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="query5">Area_worst:</label>
+                                <input type="number" step="any" class="form-control" id="query5" name="query5" value="{{ query5 if query5 else '' }}" placeholder="Enter value" required>
+                            </div>
+
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-primary mr-3" name="submit" id="submitButton">
+                                    <i class="fas fa-calculator mr-2"></i>Calculate Prediction
+                                </button>
+                                <button type="button" id="resetButton" class="btn btn-outline-secondary">Reset Form</button>
+                            </div>
+                        </form>
+
+                        <!-- Results Box (populated by backend) -->
+                        <div class="result-box">
+                            <h5><i class="fas fa-chart-line mr-2"></i>Prediction Results</h5>
+                            <div class="form-group">
+                                <label for="output1">Risk Assessment:</label>
+                                <textarea class="form-control" rows="2" id="output1" name="output1" readonly>{% if output1 %}{{ output1 }}{% endif %}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="output2">Confidence Level:</label>
+                                <textarea class="form-control" rows="2" id="output2" name="output2" readonly>{% if output2 %}{{ output2 }}{% endif %}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <p class="small text-muted">
+                                <i class="fas fa-info-circle mr-1"></i> Predict is not designed to be used in all cases. If you are unsure of any inputs or outputs, consult with a healthcare professional.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prevention Information -->
+            <div class="col-lg-5">
+                <div class="prevention-section">
+                    <div class="ribbon">
+                        <i class="fas fa-heart mr-2"></i>Empowering Women
+                    </div>
+                    <h3>Taking Control of Your Breast Health</h3>
+                    <p>Early detection and prevention are your strongest allies in the fight against breast cancer. Here's how you can take proactive steps:</p>
+
+                    <ul class="feature-list">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <strong>Regular Self-Exams</strong> - Get familiar with how your breasts normally look and feel so you can notice any changes.
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <strong>Annual Mammograms</strong> - Women over 40 should schedule yearly mammograms for early detection.
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <strong>Healthy Lifestyle</strong> - Maintain a healthy weight, exercise regularly, and limit alcohol consumption.
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <strong>Know Your Family History</strong> - Share your family health history with your doctor to assess your risk.
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <strong>Breastfeed If Possible</strong> - Breastfeeding can lower breast cancer risk, especially when continued for a year or more.
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <strong>Avoid Hormone Therapy</strong> - Limit post-menopausal hormone therapy as it can increase risk.
+                        </li>
+                    </ul>
+
+                    <div class="mt-4 p-3" style="background-color: white; border-radius: 10px;">
+                        <h5><i class="fas fa-lightbulb mr-2"></i>Did You Know?</h5>
+                        <p>When detected early, the 5-year survival rate for breast cancer is over 90%. Regular screenings and awareness are key to early detection.</p>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="https://www.who.int/news-room/events/detail/2024/10/01/default-calendar/who-global-breast-cancer-initiative--breast-cancer-awareness-month" class="who-link" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>WHO Global Breast Cancer Initiative - Awareness Month
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center">
+        <div class="container">
+            <p>&copy; 2025 BreastCare Predict. This tool is for Professional / Educational purposes and should not be used in consultation without healthcare professionals.</p>
+            <p>If you have concerns about breast cancer, please contact your healthcare provider.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Reset form functionality
+        document.getElementById('resetButton').addEventListener('click', function() {
+            // Clear all input fields
+            document.getElementById('query1').value = '';
+            document.getElementById('query2').value = '';
+            document.getElementById('query3').value = '';
+            document.getElementById('query4').value = '';
+            document.getElementById('query5').value = '';
+
+            // Clear the result fields
+            document.getElementById('output1').value = '';
+            document.getElementById('output2').value = '';
+        });
+
+        // Add loading effect when form is submitted
+        document.getElementById('predictionForm').addEventListener('submit', function(e) {
+
+
+            // Create and show loading overlay
+            const overlay = document.createElement('div');
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
+            overlay.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+            overlay.style.zIndex = '9999';
+            overlay.style.display = 'flex';
+            overlay.style.flexDirection = 'column';
+            overlay.style.justifyContent = 'center';
+            overlay.style.alignItems = 'center';
+
+            // Add spinner
+            const spinner = document.createElement('div');
+            spinner.style.width = '80px';
+            spinner.style.height = '80px';
+            spinner.style.border = '8px solid rgba(74, 111, 165, 0.3)';
+            spinner.style.borderRadius = '50%';
+            spinner.style.borderTopColor = '#4a6fa5';
+            spinner.style.animation = 'spin 1s linear infinite';
+
+            // Add text
+            const text = document.createElement('h4');
+            text.textContent = 'Analyzing Patient Data';
+            text.style.marginTop = '20px';
+            text.style.color = '#4a6fa5';
+            text.style.fontWeight = '600';
+
+            const subtext = document.createElement('p');
+            subtext.textContent = 'Please wait while we process your input...';
+            subtext.style.color = '#666';
+            subtext.style.marginTop = '10px';
+
+            // Add progress bar container
+            const progressContainer = document.createElement('div');
+            progressContainer.style.width = '300px';
+            progressContainer.style.marginTop = '20px';
+
+            const progressText = document.createElement('div');
+            progressText.style.display = 'flex';
+            progressText.style.justifyContent = 'space-between';
+            progressText.style.marginBottom = '5px';
+            progressText.style.fontSize = '14px';
+            progressText.style.color = '#666';
+
+            const progressBar = document.createElement('div');
+            progressBar.style.width = '100%';
+            progressBar.style.height = '8px';
+            progressBar.style.backgroundColor = '#e9ecef';
+            progressBar.style.borderRadius = '4px';
+            progressBar.style.overflow = 'hidden';
+
+            const progressFill = document.createElement('div');
+            progressFill.style.width = '0%';
+            progressFill.style.height = '100%';
+            progressFill.style.backgroundColor = '#4a6fa5';
+            progressFill.style.transition = 'width 0.3s ease';
+
+            progressBar.appendChild(progressFill);
+            progressContainer.appendChild(progressText);
+            progressContainer.appendChild(progressBar);
+
+            overlay.appendChild(spinner);
+            overlay.appendChild(text);
+            overlay.appendChild(subtext);
+            overlay.appendChild(progressContainer);
+            document.body.appendChild(overlay);
+
+            // Simulate analysis with progress bar (5 seconds total)
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += 1;
+                progressFill.style.width = progress + '%';
+                progressText.innerHTML = `<span>Processing...</span><span>${progress}%</span>`;
+
+                if (progress >= 125) {
+                    clearInterval(progressInterval);
+
+                    // Wait a moment at 100% before submitting (total 5 seconds)
+                    setTimeout(() => {
+                        // The form will submit normally to the backend
+                        // The overlay will disappear when the page reloads with results
+                    }, 1000);
+                }
+            }, 40); // Update progress bar every 50ms (slower for 5 seconds total)
+
+            // The form will continue to submit normally to the backend
+            // The overlay will disappear when the page reloads with results from the backend
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Breast Cancer Prediction Tool</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #6c757d;
+            --accent: #e83e8c;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --pink-light: #fff5f7;
+            --blue-light: #e8f4f8;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: linear-gradient(to right, var(--primary), #6c5ce7);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: white !important;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color: white !important;
+            transform: translateY(-2px);
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(74, 111, 165, 0.9), rgba(108, 92, 231, 0.85)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%234a6fa5" opacity="0.1"/><path d="M0 0L100 100" stroke="%23ffffff" stroke-width="1" opacity="0.1"/><path d="M100 0L0 100" stroke="%23ffffff" stroke-width="1" opacity="0.1"/></svg>');
+            color: white;
+            padding: 2rem 0;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            background: linear-gradient(to right, var(--primary), #6c5ce7);
+            color: white;
+            font-weight: 600;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 1rem 1.5rem;
+        }
+
+        .contact-section {
+            padding: 40px 0;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .competency-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            height: 100%;
+        }
+
+        .competency-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .domain-section {
+            background-color: var(--pink-light);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .domain-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .tech-badge {
+            background: linear-gradient(to right, var(--primary), #6c5ce7);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+
+        .email-section {
+            background-color: var(--blue-light);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .email-link {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .email-link:hover {
+            color: #c2185b;
+            text-decoration: underline;
+        }
+
+        footer {
+            background: linear-gradient(to right, var(--dark), #2c3e50);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('home') }}">
+                <i class="fas fa-ribbon mr-2"></i>BreastCare Predict
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('about') }}">About Predict</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contact Hero Section -->
+    <div class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-4 font-weight-bold">Contact Me</h1>
+            <p class="lead">Get in touch to discuss data science projects and opportunities</p>
+        </div>
+    </div>
+
+    <div class="container contact-section">
+        <!-- Email Section at the Top -->
+        <div class="email-section">
+            <h3><i class="fas fa-envelope mr-2"></i>Get In Touch</h3>
+            <p>Feel free to reach out for collaboration, consulting, or just to discuss data science!</p>
+            <p class="mt-3">
+                <strong>Email:</strong>
+                <a href="mailto:sunnypeterpython@gmail.com" class="email-link">sunnypeterpython@gmail.com</a>
+            </p>
+        </div>
+
+        <div class="profile-header">
+            <div class="profile-icon">
+                <i class="fas fa-user-tie"></i>
+            </div>
+            <h3>Akam Sunny Peter</h3>
+            <h2>Data Scientist & Machine Learning Engineer</h2>
+            <p class="lead">Specializing in Data Analytics, Time Series Analysis, ML, DL & NLP</p>
+            <p>Driving Innovation in Business, Healthcare, and Sports</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card mb-5">
+                    <div class="card-header">
+                        <h3><i class="fas fa-star mr-2"></i>Professional Summary</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>As a passionate and results-driven Data Scientist and Machine Learning Engineer, I specialize in transforming complex data into actionable insights and intelligent solutions. With expertise spanning <strong>Data Analytics, Time Series Analysis, Machine Learning, Deep Learning, and Natural Language Processing (NLP)</strong>, I leverage cutting-edge technologies to solve real-world challenges across diverse domains.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="text-center mb-4">Core Competencies</h2>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="competency-card">
+                    <h4><i class="fas fa-chart-bar mr-2"></i>Data Analytics</h4>
+                    <p>Extracting meaningful patterns from large datasets to inform strategic decision-making.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="competency-card">
+                    <h4><i class="fas fa-wave-square mr-2"></i>Time Series Analysis</h4>
+                    <p>Forecasting trends, anomaly detection, and optimizing temporal data for predictive modeling.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="competency-card">
+                    <h4><i class="fas fa-brain mr-2"></i>Machine Learning</h4>
+                    <p>Developing robust ML models for classification, regression, clustering, and recommendation systems.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="competency-card">
+                    <h4><i class="fas fa-network-wired mr-2"></i>Deep Learning</h4>
+                    <p>Architecting neural networks for image recognition, sequence modeling, and advanced pattern recognition.</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="text-center my-5">Domain Expertise</h2>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="domain-section">
+                    <div class="domain-icon">💼</div>
+                    <h4>Business Optimization</h4>
+                    <ul>
+                        <li>Leveraged data-driven strategies to enhance operational efficiency, reduce costs, and increase profitability.</li>
+                        <li>Developed customer segmentation models to personalize marketing campaigns and improve customer retention.</li>
+                        <li>Implemented predictive maintenance solutions to minimize downtime and optimize resource allocation.</li>
+                        <li>Developed Customer Churn predictive model to help businesses find new approaches to retain customers.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="domain-section">
+                    <div class="domain-icon">🏥</div>
+                    <h4>Healthcare Innovation</h4>
+                    <ul>
+                        <li>Built ML models for early disease detection, patient outcome prediction, and medical image analysis.</li>
+                        <li>Created time series models for epidemic forecasting and resource planning in healthcare systems.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="domain-section">
+                    <div class="domain-icon">⚽</div>
+                    <h4>Sports Analytics</h4>
+                    <ul>
+                        <li>Developed player performance prediction models and injury risk assessment tools.</li>
+                        <li>Designed game strategy optimization systems using spatial and temporal data analysis.</li>
+                        <li>Built fan engagement platforms using recommendation systems and sentiment analysis.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="text-center my-5">Technical Toolkit</h2>
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="mb-4">
+                    <h4>Programming</h4>
+                    <span class="tech-badge">Python (Pandas, NumPy, Scikit-learn)</span>
+                    <span class="tech-badge">TensorFlow</span>
+                    <span class="tech-badge">PyTorch</span>
+                    <span class="tech-badge">Keras</span>
+                    <span class="tech-badge">Sklearn</span>
+                    <span class="tech-badge">SQL</span>
+                </div>
+
+                <div class="mb-4">
+                    <h4>Visualization</h4>
+                    <span class="tech-badge">Tableau</span>
+                    <span class="tech-badge">Power BI</span>
+                    <span class="tech-badge">Matplotlib</span>
+                    <span class="tech-badge">Seaborn</span>
+                    <span class="tech-badge">Plotly</span>
+                </div>
+
+                <div class="mb-4">
+                    <h4>Big Data Tools</h4>
+                    <span class="tech-badge">Spark</span>
+                    <span class="tech-badge">Hadoop</span>
+                    <span class="tech-badge">AWS SageMaker</span>
+                    <span class="tech-badge">Google Cloud AI Platform</span>
+                </div>
+
+                <div class="mb-4">
+                    <h4>Deployment</h4>
+                    <span class="tech-badge">Flask</span>
+                    <span class="tech-badge">FastAPI</span>
+                    <span class="tech-badge">AWS</span>
+                    <span class="tech-badge">Vercel</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-lightbulb mr-2"></i>Philosophy</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>I believe in the power of data to drive meaningful change. Whether optimizing business processes, advancing healthcare outcomes, or enhancing sports performance, I approach every challenge with a blend of analytical rigor and creative problem-solving. My goal is to bridge the gap between data and decision-making, delivering solutions that are not only technically sound but also actionable and impactful.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <a href="{{ url_for('home') }}" class="btn btn-primary btn-lg">
+                <i class="fas fa-arrow-left mr-2"></i>Back to Prediction Tool
+            </a>
+        </div>
+    </div>
+
+    <footer class="text-center mt-5">
+        <div class="container">
+            <p>&copy; 2025 BreastCare Predict. This tool is for Professional / Educational purposes and should not be used in consultation without healthcare professionals.</p>
+            <p>If you have concerns about breast cancer, please contact your healthcare provider.</p>
+        </div>
+    </footer>
+</body>
+</html>
