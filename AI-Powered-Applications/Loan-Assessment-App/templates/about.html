@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - AkSun Finance</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Futura:wght@400;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #003087;    /* Deep blue */
+            --secondary: #555555;  /* Dark gray for text */
+            --accent: #FFCC00;    /* Gold for accents */
+            --light: #FFFFFF;     /* White background */
+            --white: #FFFFFF;     /* Pure white */
+            --border-color: #E0E0E0; /* Light gray border */
+        }
+
+        body {
+            font-family: 'Futura', sans-serif;
+            background-color: var(--light);
+            color: var(--secondary);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header Styles */
+        .top-header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .top-header a {
+            color: var(--white);
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        .top-header a:hover {
+            text-decoration: underline;
+        }
+
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+
+        .navbar-brand {
+            font-family: 'Futura', sans-serif;
+            font-weight: 700;
+            color: var(--primary) !important;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            font-family: 'Futura', sans-serif;
+            color: var(--secondary) !important;
+            font-weight: 500;
+            transition: color 0.3s;
+            margin: 0 10px;
+        }
+
+        .nav-link:hover {
+            color: var(--primary) !important;
+        }
+
+        .nav-item.active .nav-link {
+            color: var(--primary) !important;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(rgba(0, 48, 135, 0.85), rgba(0, 48, 135, 0.85)), url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 5rem 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .hero-section h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero-section p {
+            font-family: 'Futura', sans-serif;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Card Styles */
+        .card {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-header {
+            font-family: 'Futura', sans-serif;
+            background-color: var(--primary);
+            color: var(--white);
+            font-weight: 600;
+            border-radius: 8px 8px 0 0;
+            padding: 1.2rem;
+            font-size: 1.1rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 4rem 0;
+        }
+
+        /* AI Feature Styles */
+        .ai-feature {
+            font-family: 'Futura', sans-serif;
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+            text-align: center;
+            height: 100%;
+        }
+
+        .ai-feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .ai-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Impact Stat Styles */
+        .impact-stat {
+            font-family: 'Futura', sans-serif;
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), #0047AB);
+            color: var(--white);
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            font-family: 'Futura', sans-serif;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .social-icons a {
+            color: var(--white);
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-box {
+            background-color: #f0f7ff;
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 3rem 0;
+            }
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            .about-section {
+                padding: 2rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="top-header">
+        <div class="container">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <a href="#"><i class="fas fa-phone-alt mr-1"></i> +234 700 727 2265</a>
+                    <a href="#"><i class="fas fa-envelope mr-1"></i> customercare@AkpetLoan.com</a>
+                </div>
+                <div>
+                    <a href="#"><i class="fas fa-user mr-1"></i> Internet Banking</a>
+                    <a href="#"><i class="fas fa-map-marker-alt mr-1"></i> Branch Locator</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('home') }}">
+                <i class="fas fa-university mr-2"></i>LoanMaster Pro
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('about') }}">About AkpetLoan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-search"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Hero Section -->
+    <div class="hero-section">
+        <div class="container text-center">
+            <h1>About Our Loan Technology</h1>
+            <p>Empowering financial decisions with advanced loan assessment technology</p>
+        </div>
+    </div>
+
+    <!-- About Content -->
+    <div class="container about-section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card mb-5">
+                    <div class="card-header">
+                        <h3><i class="fas fa-calculator mr-2"></i>How Technology Revolutionizes Loan Approvals</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Our AkpetLoan Tool represents the forefront of financial technology. By utilizing machine learning algorithms trained on extensive financial data, we've created a robust system that assists in loan approval and risk assessment.</p>
+
+                        <p>The system evaluates key financial indicators such as income, credit history, loan amount, and debt-to-income ratio to identify patterns that ensure accurate lending decisions. This enables faster approvals and tailored financial solutions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="text-center mb-4">How Our Technology Works</h2>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="ai-feature text-center">
+                    <div class="ai-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h4>Data Analysis</h4>
+                    <p>Our system processes extensive financial data using advanced algorithms trained on diverse loan datasets.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="ai-feature text-center">
+                    <div class="ai-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4>Risk Assessment</h4>
+                    <p>Machine learning models detect patterns to provide precise loan approval probabilities.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="ai-feature text-center">
+                    <div class="ai-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h4>Financial Decision Support</h4>
+                    <p>The tool offers data-driven insights to support loan officers in decision-making.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-pie mr-2"></i>The Potential of Technology in Lending</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Advanced technology has the potential to transform lending in several key ways:</p>
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <strong>Fast Approvals</strong> - Technology identifies creditworthy applicants quickly, reducing approval times.
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Personalized Loans</strong> - Data-driven models enable customized loan terms based on individual financial profiles.
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Reduced Errors</strong> - Consistent analysis minimizes human bias and errors in loan evaluations.
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Broader Access</strong> - Tools extend financial services to underserved regions with limited banking infrastructure.
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Improved Insights</strong> - Technology analyzes trends to enhance lending strategies and risk management.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="text-center my-5">Technology Impact in Numbers</h2>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="impact-stat">
+                    <span class="stat-number">95%</span>
+                    <span class="stat-label">Accuracy in risk assessment</span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="impact-stat">
+                    <span class="stat-number">50%</span>
+                    <span class="stat-label">Faster approvals</span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="impact-stat">
+                    <span class="stat-number">10,000+</span>
+                    <span class="stat-label">Loan applications analyzed</span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="impact-stat">
+                    <span class="stat-number">25%</span>
+                    <span class="stat-label">Improvement in approval rates</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-lock mr-2"></i>Ethical Technology & Privacy</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>We are committed to the ethical use of technology in lending:</p>
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <strong>Customer Privacy</strong> - All financial data is encrypted and complies with global privacy standards.
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Transparent Processes</strong> - Our models are designed for clarity, allowing users to understand approval decisions.
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Bias Reduction</strong> - We implement measures to eliminate bias and ensure fair lending practices.
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Expert Oversight</strong> - Our tool assists, not replaces, financial experts, with all decisions validated professionally.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-lg-12 text-center">
+                <div class="info-box">
+                    <h4><i class="fas fa-lightbulb mr-2"></i>Future Developments</h4>
+                    <p>We are continuously enhancing our technology through research and partnerships with financial institutions. Future updates will integrate additional data sources, such as credit scores and market trends, to improve loan accuracy and accessibility.</p>
+                    <p>Our mission is to empower individuals and businesses with seamless financial solutions through innovative technology.</p>
+                </div>
+
+                <a href="{{ url_for('home') }}" class="btn btn-primary btn-lg mt-4" style="background-color: var(--primary); border-color: var(--primary);">
+                    <i class="fas fa-arrow-left mr-2"></i>Back to Loan Application
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>AkpetLoan</h5>
+                    <p>Providing intelligent loan assessment solutions for financial institutions and individual borrowers.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="{{ url_for('home') }}">Home</a></li>
+                        <li><a href="{{ url_for('about') }}">About Us</a></li>
+                        <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Contact Us</h5>
+                    <p><i class="fas fa-map-marker-alt mr-2"></i> 1213 Financial District, Lagos, Nigeria</p>
+                    <p><i class="fas fa-phone-alt mr-2"></i> +234 711 723 2265</p>
+                    <p><i class="fas fa-envelope mr-2"></i> customercare@AkSunFinance.com</p>
+                </div>
+            </div>
+            <hr style="background-color: rgba(255,255,255,0.2);">
+            <div class="text-center pt-3">
+                <p>&copy; 2025 AkSun Finance. All rights reserved. | For professional/educational use only. Consult a financial expert for personalized advice.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

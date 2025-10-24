@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AkSun Finance</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary: #003087;    /* Deep blue */
+            --secondary: #555555;  /* Dark gray for text */
+            --accent: #FFCC00;    /* Gold/yellow accent */
+            --light: #F9F9F9;     /* Light background */
+            --white: #FFFFFF;     /* Pure white */
+            --border-color: #E0E0E0; /* Light gray border */
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary) !important;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--secondary) !important;
+            font-weight: 500;
+            transition: color 0.3s;
+            margin: 0 10px;
+        }
+
+        .nav-link:hover {
+            color: var(--primary) !important;
+        }
+
+        .nav-item.active .nav-link {
+            color: var(--primary) !important;
+            font-weight: 600;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0, 48, 135, 0.85), rgba(0, 48, 135, 0.85)), url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 0;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            background: linear-gradient(to right, var(--primary), #0047AB);
+            color: white;
+            font-weight: 600;
+            border-radius: 10px 10px 0 0 !important;
+            padding: 1rem 1.5rem;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.2rem rgba(0, 48, 135, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), #0047AB);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 48, 135, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 48, 135, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn-outline-secondary {
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-weight: 600;
+        }
+
+        .info-section {
+            background-color: #e8f4f8;
+            border-left: 5px solid var(--primary);
+            padding: 25px;
+            border-radius: 10px;
+            height: 100%;
+        }
+
+        .info-section h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .feature-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .feature-list li i {
+            position: absolute;
+            left: 0;
+            top: 3px;
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        .result-box {
+            background-color: #f0f7ff;
+            border-left: 5px solid var(--success);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            transition: all 0.5s ease;
+        }
+
+        .info-note {
+            background-color: #e8f4f8;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .badge {
+            background-color: var(--accent);
+            color: #333;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .learn-more-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            background-color: rgba(0, 48, 135, 0.1);
+        }
+
+        .learn-more-link:hover {
+            color: white;
+            background-color: var(--primary);
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 48, 135, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section {
+                margin-top: 2rem;
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .form-row {
+            margin-bottom: 15px;
+        }
+        
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .loading-content {
+            text-align: center;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .loading-spinner {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .progress-container {
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--secondary);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('home') }}">
+                <i class="fas fa-university mr-2"></i>AkSun Finance
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('about') }}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-4 font-weight-bold">Loan Approval Assessment</h1>
+            <p class="lead">Advanced Professional Loan Evaluation Technology</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="info-note">
+            <strong><i class="fas fa-info-circle mr-2"></i>Note:</strong> We use advanced financial algorithms and updated market data to ensure accurate loan assessments.
+        </div>
+
+        <div class="row">
+            <!-- Prediction Form -->
+            <div class="col-lg-7">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-file-alt mr-2"></i>Applicant Information
+                    </div>
+                    <div class="card-body">
+                        <!-- Loading Overlay -->
+                        <div id="loadingOverlay" class="loading-overlay">
+                            <div class="loading-content">
+                                <i class="fas fa-spinner loading-spinner fa-spin"></i>
+                                <h3>Processing Application</h3>
+                                <p>Please wait while we analyze the applicant data...</p>
+                                <div class="progress-container">
+                                    <div class="progress-text">
+                                        <span>Processing...</span><span id="progressPercentage">0%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div id="progressFill" class="progress-fill"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form action="{{ url_for('loanEvaluator') }}" method="POST" id="loanEvaluatorForm">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="query1">Age:</label>
+                                        <input type="number" step="any" class="form-control" id="query1" name="query1" value="{{ query1 if query1 else '' }}" placeholder="Enter age" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="query2">Annual Income:</label>
+                                        <input type="number" step="any" class="form-control" id="query2" name="query2" value="{{ query2 if query2 else '' }}" placeholder="Enter annual income" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="query3">Home Ownership:</label>
+                                        <input type="text" class="form-control" id="query3" name="query3" value="{{ query3 if query3 else '' }}" placeholder="RENT, MORTGAGE, OWN, OTHER" oninput="this.value = this.value.toUpperCase()" style="text-transform:uppercase;" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="query4">Employment Length:</label>
+                                        <input type="number" step="any" class="form-control" id="query4" name="query4" value="{{ query4 if query4 else '' }}" placeholder="Years employed" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="query5">Loan Intent:</label>
+                                        <input type="text" class="form-control" id="query5" name="query5" value="{{ query5 if query5 else '' }}" placeholder="EDUCATION, MEDICAL, PERSONAL, etc." oninput="this.value = this.value.toUpperCase()" style="text-transform:uppercase;" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="query6">Loan Grade:</label>
+                                        <input type="text" class="form-control" id="query6" name="query6" value="{{ query6 if query6 else '' }}" placeholder="A, B, C, D, E, F, G" oninput="this.value = this.value.toUpperCase()" style="text-transform:uppercase;" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="query7">Loan Amount:</label>
+                                        <input type="number" step="any" class="form-control" id="query7" name="query7" value="{{ query7 if query7 else '' }}" placeholder="Enter loan amount" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="query8">Interest Rate:</label>
+                                        <input type="number" step="any" class="form-control" id="query8" name="query8" value="{{ query8 if query8 else '' }}" placeholder="Enter interest rate %" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="query9">Loan-to-Income Ratio:</label>
+                                        <input type="number" step="any" class="form-control" id="query9" name="query9" value="{{ query9 if query9 else '' }}" placeholder="Enter percentage" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="query10">Default History:</label>
+                                        <input type="text" class="form-control" id="query10" name="query10" value="{{ query10 if query10 else '' }}" placeholder="Y for Yes, N for No" oninput="this.value = this.value.toUpperCase()" style="text-transform:uppercase;" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="query11">Credit History Length:</label>
+                                        <input type="number" step="any" class="form-control" id="query11" name="query11" value="{{ query11 if query11 else '' }}" placeholder="Years of credit history" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-primary mr-3" name="submit" id="submitButton">
+                                    <i class="fas fa-calculator mr-2"></i>Evaluate Application
+                                </button>
+                                <button type="button" id="resetButton" class="btn btn-outline-secondary">Reset Form</button>
+                            </div>
+                        </form>
+
+                        <!-- Results Box -->
+                        <div class="result-box">
+                            <h5><i class="fas fa-chart-line mr-2"></i>Assessment Results</h5>
+                            <div class="form-group">
+                                <label for="output1">Approval Decision:</label>
+                                <textarea class="form-control" rows="2" id="output1" name="output1" readonly>{% if output1 %}{{ output1 }}{% endif %}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="output2">Confidence Level:</label>
+                                <textarea class="form-control" rows="2" id="output2" name="output2" readonly>{% if output2 %}{{ output2 }}{% endif %}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <p class="small text-muted">
+                                <i class="fas fa-info-circle mr-1"></i> This tool provides preliminary assessment only. Final approval is subject to additional verification and terms.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Information Section -->
+            <div class="col-lg-5">
+                <div class="info-section">
+                    <div class="badge">
+                        <i class="fas fa-lightbulb mr-2"></i>Improve Approval Odds
+                    </div>
+                    <h3>Tips for Loan Approval</h3>
+                    <p>Increase your chances of loan approval with these strategic approaches:</p>
+
+                    <ul class="feature-list">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <strong>Maintain Good Credit</strong> - Regularly check and improve your credit score.
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <strong>Stable Employment</strong> - Demonstrate consistent income history.
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <strong>Manage Debt Ratio</strong> - Keep your debt-to-income ratio below 40%.
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <strong>Accurate Documentation</strong> - Provide complete and truthful information.
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <strong>Reasonable Loan Amount</strong> - Request amounts aligned with your repayment capacity.
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <strong>Clear Loan Purpose</strong> - Have a well-defined reason for the loan request.
+                        </li>
+                    </ul>
+
+                    <div class="mt-4 p-3" style="background-color: white; border-radius: 10px;">
+                        <h5><i class="fas fa-chart-bar mr-2"></i>Did You Know?</h5>
+                        <p>Applicants with credit scores above 700 have approval rates 3x higher than those with scores below 600.</p>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="https://www.consumerfinance.gov/" class="learn-more-link" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>Financial Education Resources
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center">
+        <div class="container">
+            <p>&copy; 2025 AkSun Finance. This tool is for Professional / Educational purposes and should not be used as the sole basis for lending decisions.</p>
+            <p>Always consult with financial experts for comprehensive loan assessment.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Reset form functionality
+        document.getElementById('resetButton').addEventListener('click', function() {
+            // Clear all input fields
+            document.getElementById('query1').value = '';
+            document.getElementById('query2').value = '';
+            document.getElementById('query3').value = '';
+            document.getElementById('query4').value = '';
+            document.getElementById('query5').value = '';
+            document.getElementById('query6').value = '';
+            document.getElementById('query7').value = '';
+            document.getElementById('query8').value = '';
+            document.getElementById('query9').value = '';
+            document.getElementById('query10').value = '';
+            document.getElementById('query11').value = '';
+            
+            // Clear the result fields
+            document.getElementById('output1').value = '';
+            document.getElementById('output2').value = '';
+        });
+
+        // Add loading effect when form is submitted
+        document.getElementById('loanEvaluatorForm').addEventListener('submit', function(e) {
+            // Show loading overlay
+            const overlay = document.getElementById('loadingOverlay');
+            const progressFill = document.getElementById('progressFill');
+            const progressPercentage = document.getElementById('progressPercentage');
+            
+            overlay.style.display = 'flex';
+            
+            // Simulate analysis with progress bar
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += 1;
+                progressFill.style.width = progress + '%';
+                progressPercentage.textContent = progress + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                    
+                    // The form will submit normally to the backend
+                    // The overlay will disappear when the page reloads with results
+                }
+            }, 40); // Update progress bar every 40ms (4 seconds total)
+        });
+    </script>
+</body>
+</html>
