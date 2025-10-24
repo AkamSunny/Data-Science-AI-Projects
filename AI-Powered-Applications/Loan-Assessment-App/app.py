@@ -35,9 +35,9 @@ def load_models():
 
         # Check and download/load files
         file_configs = [
-            (xgb_output, "1KP_ixxX-vUp7ilouWVPpf7llicWEylbX", "XGBoost model"),
-            (dummy_output, "1ZhgQlzrZ5uv6YOAd5ONqAEYQgC9nqSG_", "encoder"),
-            (sc_output, "1cszbq3Qedprgg5FUkVcAf89FKXke2Omf", "scaler")
+            (xgb_output, "1KP_ixxX-vUp7eilouWVPrpf7llicWEylbX", "XGBoost model"),
+            (dummy_output, "1ZhgQlzrmZ5uv6YvbOAd5ONqAEYQrgC9nqSG_", "encoder"),
+            (sc_output, "1cszbq3Qedprzgg5FUkVcAf89FKXpke2Omf", "scaler")
         ]
 
         for file_path, file_id, file_type in file_configs:
@@ -215,3 +215,4 @@ def handler(request=None):
 if __name__ == "__main__":
     logger.info("Starting Flask application...")
     app.run(debug=True, host='0.0.0.0', port=7860)
+
