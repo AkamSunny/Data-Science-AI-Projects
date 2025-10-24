@@ -1,6 +1,6 @@
 🏦 AkSun Finance - Loan Assessment System
 
-https://huggingface.co/spaces/chemman/Loan-Assessment-App
+Go to web App: https://huggingface.co/spaces/chemman/Loan-Assessment-App
 
 Problem Statement:
 Financial institutions face significant challenges in accurately assessing loan applicant credibility, leading to either:
@@ -142,4 +142,5 @@ API for third-party integrations
 
 Contributors:
 Akam Sunny Peter - Data Scientist/AI Engineer
+
 
