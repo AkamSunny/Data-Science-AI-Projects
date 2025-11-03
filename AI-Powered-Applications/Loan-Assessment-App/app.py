@@ -8,14 +8,14 @@ import gdown
 import time
 import logging
 
-# Configure logging
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Create app - templates are in the 'templates' folder in the same directory
+
 app = Flask(__name__)
 
-# Global variables for models
+
 xgb_model = None
 scaler = None
 prod_dummies = None
@@ -28,12 +28,12 @@ def load_models():
     try:
         logger.info("Starting model loading...")
         
-        # Define file paths
+        
         xgb_output = "loan_xgb_model.pkl"
         dummy_output = "loan_dummies.pkl"
         sc_output = "loan_scaler.pkl"
 
-        # Check and download/load files
+       
         file_configs = [
             (xgb_output, "1KP_ixxX-vUp7eilouWVPrpf7llicWEylbX", "XGBoost model"),
             (dummy_output, "1ZhgQlzrmZ5uv6YvbOAd5ONqAEYQrgC9nqSG_", "encoder"),
@@ -48,7 +48,7 @@ def load_models():
             else:
                 logger.info(f"Loading existing {file_type} from {file_path}...")
 
-        # Load models with individual error handling
+        
         logger.info("Loading scaler...")
         scaler = joblib.load(sc_output)
         logger.info("✓ Scaler loaded")
@@ -61,7 +61,7 @@ def load_models():
         xgb_model = joblib.load(xgb_output)
         logger.info("✓ XGBoost model loaded")
         
-        # Verify all models are loaded
+        
         if all([xgb_model is not None, scaler is not None, prod_dummies is not None]):
             models_loaded = True
             logger.info("🎉 All models loaded successfully!")
@@ -127,7 +127,7 @@ def loanEvaluator():
                              output2="")
 
     try:
-        # Get inputs from form with validation
+       
         required_fields = ['query1', 'query2', 'query3', 'query4', 'query5', 
                           'query6', 'query7', 'query8', 'query9', 'query10', 'query11']
         
@@ -150,7 +150,7 @@ def loanEvaluator():
         inputQuery10 = request.form['query10']
         inputQuery11 = float(request.form['query11'])
 
-        # Prepare input data
+        
         data = [[inputQuery1, inputQuery2, inputQuery3, inputQuery4, inputQuery5,
                  inputQuery6, inputQuery7, inputQuery8, inputQuery9, inputQuery10, inputQuery11]]
         
@@ -161,16 +161,16 @@ def loanEvaluator():
             "cb_person_default_on_file", "cb_person_cred_hist_length"
         ])
 
-        # One-hot encoding
+       
         categorical_col = ["person_home_ownership", "loan_intent", "loan_grade", "cb_person_default_on_file"]
         data_enc = pd.get_dummies(data_fr, columns=categorical_col, drop_first=True)
         data_enc = data_enc.reindex(columns=prod_dummies, fill_value=0)
         
-        # Scale & predict
+      
         data_sc = scaler.transform(data_enc)
         proba = xgb_model.predict_proba(data_sc)
 
-        # Determine prediction
+      
         pred_class = int(proba[0][1] >= 0.5)
         
         if pred_class == 0:
@@ -182,7 +182,7 @@ def loanEvaluator():
 
         output2 = f"Confidence: {confidence}"
         
-        # Return results with all form data preserved
+        
         return render_template("home.html", 
                              output1=output1, 
                              output2=output2,
@@ -198,7 +198,7 @@ def loanEvaluator():
         return render_template("home.html", output1=error_message, output2="")
 
 
-# Vercel compatible handler
+
 def handler(request=None):
     if request is None:
         return app
@@ -211,8 +211,9 @@ def handler(request=None):
             
         return response
 
-# For local development
+
 if __name__ == "__main__":
     logger.info("Starting Flask application...")
     app.run(debug=True, host='0.0.0.0', port=7860)
+
 
